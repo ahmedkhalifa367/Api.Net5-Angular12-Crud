@@ -1,7 +1,7 @@
   <div class="row m-2">
     <label class="col-sm-4 col-form-label">Book Name</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" required [(ngModel)]="BookTitle"
+        <input type="text" class="form-control" required pattern="[a-zA-Z]*" [(ngModel)]="BookTitle"
         placeholder="Enter Book Name">
     </div>
 

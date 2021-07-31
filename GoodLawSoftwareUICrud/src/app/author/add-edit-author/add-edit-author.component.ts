@@ -31,7 +31,6 @@ export class AddEditAuthorComponent implements OnInit {
 
   updateAuthor(){
     var val = {id:this.AuthorId,name:this.AuthorName};
-    console.log(val);
     this.service.updateAuthor(val).subscribe(res=>{
       this.toastr.success("Author " + val.name.toString() +" was updated successfully")
     });
