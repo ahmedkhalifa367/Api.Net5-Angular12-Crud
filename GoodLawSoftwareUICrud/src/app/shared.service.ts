@@ -19,7 +19,7 @@ export class SharedService {
     }
 
     updateAuthor(val:any){
-      return this.http.post(this.APIUrl+'/Authors/',val);
+      return this.http.put(this.APIUrl+'/Authors/'+val.id,val);
     }
 
     deleteAuthor(val:any){
@@ -36,7 +36,7 @@ export class SharedService {
     }
 
     updateBook(val:any){
-      return this.http.put(this.APIUrl+'/Books',val);
+      return this.http.put(this.APIUrl+'/Books/'+val.id,val);
     }
 
     deleteBook(val:any){

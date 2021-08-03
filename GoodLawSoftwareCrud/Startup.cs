@@ -19,8 +19,6 @@ namespace GoodLawSoftwareCrud
 {
     public class Startup
     {
-        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,25 +29,16 @@ namespace GoodLawSoftwareCrud
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("Policy",
-            //        builder =>
-            //        {
-            //            builder.WithOrigins("http://localhost:4200")
-            //                .AllowAnyHeader()
-            //                .AllowAnyMethod();
-            //        });
-            //});
-
-            services.AddCors(opt =>
+            services.AddCors(options =>
             {
-                opt.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
+                options.AddPolicy("Policy",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                               //.WithOrigins("http://localhost:4200");
+                    });
             });
 
             services.AddControllers();
@@ -67,7 +56,6 @@ namespace GoodLawSoftwareCrud
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.UseCors(MyAllowSpecificOrigins);
 
 
             if (env.IsDevelopment())
@@ -81,10 +69,7 @@ namespace GoodLawSoftwareCrud
 
             app.UseRouting();
 
-            app.UseCors(x => x
-                .WithOrigins("http://localhost:4200")
-                .AllowAnyHeader()
-                .AllowAnyMethod());
+            app.UseCors("Policy");
 
             app.UseAuthorization();
 
